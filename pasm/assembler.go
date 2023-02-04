@@ -5,15 +5,21 @@ import (
 )
 
 type Builder struct {
-	Labels       map[string]uint16
-	Instructions []Instruction
-	SideSetCount uint16
-	SideSetOpt   bool
-	BaseAddr     uint16
+	Labels         map[string]uint16
+	Instructions   []Instruction
+	SideSetCount   uint16
+	SideSetOpt     bool
+	BaseAddr       uint16
+	WrapAddr       uint16
+	WrapTargetAddr uint16
 }
 
 type Instruction interface {
 	ToBinary(b *Builder) uint16
+}
+
+func Abc() {
+	fmt.Printf("aaaa")
 }
 
 func (b *Builder) evalDss(delay, sideSet uint16) uint16 {
@@ -30,10 +36,12 @@ func NewBuilder() *Builder {
 	// TODO curAddr can be different at the very beginning
 	// look at ".origin <offset>" p.317
 	return &Builder{
-		BaseAddr:     0,
-		SideSetCount: 0,
-		Instructions: make([]Instruction, 0),
-		Labels:       make(map[string]uint16),
+		BaseAddr:       0,
+		SideSetCount:   0,
+		Instructions:   make([]Instruction, 0),
+		Labels:         make(map[string]uint16),
+		WrapAddr:       0,
+		WrapTargetAddr: 0,
 	}
 }
 
@@ -45,6 +53,14 @@ func (b *Builder) SideSet(count uint16, opt bool) *Builder {
 
 func (b *Builder) Label(name string) {
 	b.Labels[name] = b.curAddr()
+}
+
+func (b *Builder) Wrap() {
+	b.WrapAddr = b.curAddr()
+}
+
+func (b *Builder) WrapTarget() {
+	b.WrapTargetAddr = b.curAddr()
 }
 
 func (b *Builder) Add(i Instruction) {

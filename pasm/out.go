@@ -21,5 +21,5 @@ type Out struct {
 const outCode uint16 = 0b011 << 13
 
 func (in *Out) ToBinary(b *Builder) uint16 {
-	return outCode | b.evalDss(in.Delay, in.SideSet) | in.Dst | in.BitCount
+	return outCode | b.evalDss(in.Delay, in.SideSet) | in.Dst | (in.BitCount % 32)
 }

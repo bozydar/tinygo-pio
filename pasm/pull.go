@@ -1,8 +1,8 @@
 package pasm
 
 const (
-	ifEmpty uint16 = 0b10 << 5
-	block   uint16 = 0b01 << 5
+	ifEmpty uint16 = 0b1 << 6
+	block   uint16 = 0b1 << 5
 )
 
 type Pull struct {

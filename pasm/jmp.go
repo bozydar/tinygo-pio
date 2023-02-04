@@ -1,14 +1,14 @@
 package pasm
 
 const (
-	JmpConAlways  uint16 = 0b000 << 4
-	JmpConNotX    uint16 = 0b001 << 4
-	JmpConXDec    uint16 = 0b010 << 4
-	JmpConNotY    uint16 = 0b011 << 4
-	JmpConYDec    uint16 = 0b100 << 4
-	JmpConXNotY   uint16 = 0b101 << 4
-	JmpConPin     uint16 = 0b110 << 4
-	JmpConNotOsre uint16 = 0b111 << 4
+	JmpConAlways  uint16 = 0b000 << 5
+	JmpConNotX    uint16 = 0b001 << 5
+	JmpConXDec    uint16 = 0b010 << 5
+	JmpConNotY    uint16 = 0b011 << 5
+	JmpConYDec    uint16 = 0b100 << 5
+	JmpConXNotY   uint16 = 0b101 << 5
+	JmpConPin     uint16 = 0b110 << 5
+	JmpConNotOsre uint16 = 0b111 << 5
 )
 
 type Jmp struct {
